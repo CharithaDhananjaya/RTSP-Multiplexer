@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD python helloworld.py
+CMD python streaming.py
