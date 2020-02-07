@@ -1,10 +1,6 @@
-from flask import Flask
-app = Flask(__name__)
+import json
 
-@app.route("/")
-def hello():
-    return "Hello World...!"
+data = [["Camera_01", "rtsp://admin:123456@192.168.1.12/output.h264", "./src/Camera_01"],
+        ["Camera_02", "rtsp://admin:123456@192.168.1.12/output.h264", "./src/Camera_01"]]
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int("5000"), debug=True)
-
+print(str(data[0][1]))
