@@ -33,9 +33,8 @@ def recognize(faceimage):
     jsonPrint(json.loads(response.text.encode('utf8')))
 
 
-async def saveImage(n):
-    img_item = data[2]+f"/face_{n}.png"
-    n = n+1
+def saveImage(n, path, image):
+    img_item = path+f"/face_{n}.png"
     cv2.imwrite(img_item, roi_color)
 
 
@@ -57,9 +56,10 @@ def multiplexCameras(data):
         for(x, y, w, h) in faces:
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = frame[y:y+h, x:x+w]
-            saveImage(n)
-            await.asyncio.wait(saveImage)
-            # recognize('my-image.png')'''
+            img_item = data[2]+f"/face_{n}.png"
+            cv2.imwrite(img_item, roi_color)
+            print(n)
+            n = n+1
 
             color = (0, 255, 0)
             stroke = 2
@@ -68,9 +68,9 @@ def multiplexCameras(data):
             cv2.rectangle(frame, (x, y), (end_cord_x,
                                           end_cord_y), color, stroke)
 
-        cv2.imshow(data[0], frame)
-        if cv2.waitKey(20) & 0xFF == ord('q'):
-            break
+        """ cv2.imshow(data[0], frame)
+            if cv2.waitKey(20) & 0xFF == ord('q'):
+            break"""
 
     cap.release()
     cv2.destroyAllWindows()
